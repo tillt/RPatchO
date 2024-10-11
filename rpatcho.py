@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 # Example:
-# $ rpatcho "@loader_dir/../Frameworks" libtest.dylib
+# $ rpatcho libtest.dylib
+# $ rpatcho libtest.dylib "@loader_dir/../Frameworks"
 #
 
 # RPatchO - Tool for patching dylibs for making use of an rpath setup for bundled distribution.
@@ -167,12 +168,16 @@ def _set_dylib_dependency_paths(filename, target_rpath):
         )
 
 # main
+rpath = "@loader_dir/../Frameworks"
 
 n = len(sys.argv)
 
-if n < 3:
-    print(f"{sys.argv[0]} [rpath] [file]")
-    print(f"{sys.argv[0]} \"@loader_dir/../Frameworks\" libtest.dylib")
+if n < 2:
+    print(f"{sys.argv[0]} file [rpath]")
+    print(f"{sys.argv[0]} libtest.dylib \"@loader_dir/../Frameworks\"")
     exit(1)
 
-_set_dylib_dependency_paths(sys.argv[n-1], sys.argv[n-2])
+if n >= 3:
+    rpath = sys.argv[n-1]
+
+_set_dylib_dependency_paths(sys.argv[n-2], rpath)
