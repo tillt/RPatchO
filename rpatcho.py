@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+
+# Example:
+# $ rpatcho "@loader_dir/../Frameworks" libtest.dylib
+#
+
 # RPatchO - Tool for patching dylibs for making use of an rpath setup for bundled distribution.
 #
 # This is mostly a reduced copy of https://github.com/pyinstaller/pyinstaller/blob/122a99659e4b19bb38475e5c9e35a540e29451c2/PyInstaller/utils/osx.py
@@ -161,10 +167,6 @@ def _set_dylib_dependency_paths(filename, target_rpath):
         )
 
 # main
-
-# Example:
-# $ rpatcho "@loader_dir/../Frameworks" libtest.dylib
-#
 
 n = len(sys.argv)
 
